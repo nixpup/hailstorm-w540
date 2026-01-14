@@ -248,7 +248,8 @@ binds {
     
     // Terminal and launcher
     Alt+Shift+Return { spawn "kitty"; }
-    Alt+F { spawn "fuzzel" "-b" "282A2Eff" "-t" "c13f47ff" "-s" "272A2Eff" "-S" "FFFFFFFF" "-f" "DejaVu Sans Mono:size=13" "-p" "Open: "; } // +T
+    //Alt+F { spawn "fuzzel" "-b" "282A2Eff" "-t" "c13f47ff" "-s" "272A2Eff" "-S" "FFFFFFFF" "-f" "DejaVu Sans Mono:size=13" "-p" "Open: "; } // +T
+    Alt+F { spawn "wofi" "--show" "drun"; } // +T
     Alt+Shift+Q { close-window; }
     Alt+Space { switch-preset-column-width; }
     
@@ -284,8 +285,9 @@ binds {
     // Win/Super key bindings
     Win+L { spawn "hyprlock"; }
     Win+E { spawn "thunar"; }
-    Win+Period { spawn "rofimoji" "--action" "copy"; }
-    Win+F { spawn "fuzzel"; } // +T
+    //Win+Period { spawn "rofimoji" "--action" "copy"; }
+    Win+Period { spawn "sh" "-c" "$HOME/.git-clone/wofi-emoji/wofi-emoji"; }
+    Win+F { spawn "wofi" "--show" "drun"; } // +T
     
     // Screensaver controls (combined into single shell commands)
     Win+1 { spawn "sh" "-c" "killall swayidle && notify-send 'Screensaver' 'Turned OFF.' -i /home/puppy/Pictures/no.png"; }
@@ -313,6 +315,7 @@ spawn-at-startup "sh" "-c" "sleep 1 && xinput set-prop 'Mad Catz Global' 'libinp
 spawn-at-startup "gammastep" "-l" "52.520008:13.404954" "-t" "4000:4000"
 spawn-at-startup "dunst"
 spawn-at-startup "noctalia-shell"
+spawn-at-startup "vesktop"
 
 cursor {
     xcursor-theme "default"
