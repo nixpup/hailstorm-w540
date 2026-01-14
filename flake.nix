@@ -52,7 +52,7 @@
 
     vicinae.url = "github:vicinaehq/vicinae";
 
-   vicinae-extensions = {
+    vicinae-extensions = {
       url = "github:vicinaehq/extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -443,6 +443,11 @@
                urbit
                librewolf-bin # For I2P
                tor-browser # For Tor
+               # Haskell
+               haskell.compiler.native-bignum.ghc98
+               haskellPackages.cabal-install
+               cabal2nix
+               stack
                # Rust
                cargo
                rustc
@@ -592,6 +597,97 @@
                  guix-update = "guix pull && guix package --upgrade && guix gc $@";
                };
                shellInit = ''
+                 # Create Haskell default.nix to build Haskell Program with Nix
+                 create() {
+                   local help_text="create [arg] -- Create Template
+                     haskellNix -- Create Haskell Compatible default.nix File for nix-build.
+                     flakeNix -- Create a basic flake.nix to use as a development shell.
+                     shellNix -- Create a basic shell.nix to use as a development shell.
+                     packageNix -- Create a basic package.nix to be used with nix-build.
+                   
+                   Copyright - Loji (c) 2026"
+                   if [[ $# -eq 0 || $1 == "help" || $1 == "h" ]]; then
+                     echo "$help_text"
+                     return
+                   fi
+                   case $1 in
+                     haskellNix)
+                       cat > default.nix <<'EOF'
+let
+  pkgs = import <nixpkgs> { }; # pin the channel to ensure reproducibility!
+  # Add this if you are building a devShell in a flake. Usually, it's auto-detected
+  # using lib.inNixShell, but that doesn't work in flakes
+  # returnShellEnv = true;
+in
+pkgs.haskellPackages.developPackage {
+  root = ./.;
+}
+EOF
+                       echo "default.nix created."
+                       ;;
+                     flakeNix)
+                       cat > flake.nix <<'EOF'
+{
+  description = "Basic flake for development";
+
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs";
+
+  outputs = { self, nixpkgs }: {
+    devShells.default = nixpkgs.lib.mkShell {
+      buildInputs = [];
+    };
+  };
+}
+EOF
+                       echo "flake.nix created."
+                       ;;
+                     shellNix)
+                       cat > shell.nix <<'EOF'
+{ pkgs ? import <nixpkgs> {} }:
+pkgs.mkShell {
+  buildInputs = with pkgs; [
+  ];
+  shellHook = '''
+  ''';
+}
+EOF
+                       echo "shell.nix created."
+                       ;;
+                     packageNix)
+                       cat > package.nix <<'EOF'
+{ pkgs ? import <nixpkgs> {} }:
+pkgs.stdenv.mkDerivation (finalAttrs: rec {
+  pname = "";
+  version = "";
+  src = pkgs.fetchFromGitHub {
+    owner = "";
+    repo = "";
+    hash = "";
+  };
+  nativeBuildInputs = with pkgs; [
+  ];
+  buildInputs = with pkgs; [
+  ];
+  installPhase = '''
+  ''';
+  meta = with pkgs.lib; {
+    description = "";
+    homepage = "";
+    license = licenses.gpl3Plus;
+    maintainers = with maintainers; [  ];
+    platforms = platforms.linux;
+  };
+})
+EOF
+                       echo "package.nix created."
+                       ;;
+                     *)
+                       echo "Unknown argument: $1"
+                       echo "$help_text"
+                       return 1
+                       ;;
+                   esac
+                 }
                  # Open Cargo.toml in the way of your path.
                  cartom() {
                    local dir="$PWD"
@@ -933,7 +1029,6 @@
              libelf
              gnumake
              gcc
-             cabal2nix
              nix-alien
              nix-search-tv.packages.x86_64-linux.default
            ];
