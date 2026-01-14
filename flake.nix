@@ -432,6 +432,7 @@
                swaylock-fancy
                wlsunset
                wofi
+               wtype
                mako
                xwayland
                xwayland-satellite
