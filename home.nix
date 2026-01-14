@@ -776,7 +776,89 @@ in
   #      (require 'org)
   #      (org-babel-tangle-file orgfile elfile))
   #    (load-file elfile))
-  #''; 
+  #'';
+  home.file.".config/wofi/config".text = ''
+    width=480
+    location=center
+    show=drun          # or run / whatever mode you usually use
+    prompt=Run         # optional - you can change it
+    allow_markup=true
+    term=foot          # or your preferred terminal if needed
+    lines=8
+    columns=1
+  '';
+  home.file.".config/wofi/style.css".text = ''
+    @define-color bg0      #282A2E;
+    @define-color bg1      #1D1F21;
+    @define-color fg0      #C5C8C6;
+    @define-color accent   #FF2A54;
+    @define-color urgent   #A54242;
+    
+    * {
+        font-family: "DejaVu Sans Mono", monospace;
+        font-size: 14px;
+        color: @fg0;
+    }
+    window {
+        margin: 0px;
+        padding: 0px;
+        background-color: @bg0;
+        border-radius: 0px;
+    }
+    #outer-box {
+        margin: 0px;
+        padding: 0px;
+        background-color: transparent;
+    }
+    #input {
+        margin: 8px;
+        padding: 8px;
+        border: none;
+        border-radius: 0px;
+        background-color: @bg1;
+        color: @fg0;
+    }
+    #input image {
+        color: @accent;
+    }
+    #inner-box {
+        margin: 4px 0px;
+        padding: 0px;
+        background-color: transparent;
+    }
+    #scroll {
+        margin: 0px;
+    }
+    #entry {
+        padding: 8px;
+        margin: 0px 4px;
+        border-radius: 0px;
+        background-color: transparent;
+        color: inherit;
+    }
+    #entry:selected {
+        background-color: @accent;
+        color: @bg0;
+        outline: none;
+    }
+    #entry:selected * {
+        color: @bg0;
+    }
+    #text {
+        color: inherit;
+    }
+    #img {
+        margin-right: 8px;
+        size: 0.8em;     /* roughly matches rofi element-icon size */
+    }
+    #entry.urgent {
+        color: @urgent;
+    }
+    #entry:selected.urgent {
+        background-color: @urgent;
+        color: @bg0;
+    }
+  '';
   home.file.".config/rofi/config.rasi".text = ''
     configuration {
       font: "DejaVu Sans Mono 12";
