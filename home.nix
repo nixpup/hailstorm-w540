@@ -224,7 +224,7 @@ in
       bind=SUPER,t,spawn,marker
       bind=SUPER,l,spawn,hyprlock
       bind=SUPER,f,spawn,sherlock
-      bind=Alt,a,spawn,flameshot gui
+      bind=Alt,a,spawn,hyprshot -m region --clipboard-only
 
       # switch layout
       bind=Alt,space,switch_layout
