@@ -158,7 +158,7 @@ in
       rootcolor=0x201b14ff
       bordercolor=0x1d1f21ff
       focuscolor=0xff2a54ff
-      maximizescreencolor=0x89aa61ff
+      maximizescreencolor=0xff2a54ff
       urgentcolor=0xad401fff
       scratchpadcolor=0x516c93ff
       globalcolor=0xb153a7ff
@@ -211,7 +211,7 @@ in
       bind=SUPER,Space,toggleoverview,
       bind=ALT+SHIFT,space,togglefloating
       #bind=Super,Space,togglefloating
-      bind=Alt+Shift,a,togglemaximizescreen,
+      bind=Alt+Shift,m,togglemaximizescreen,
       bind=Alt+Shift,f,togglefullscreen,
       bind=SUPER+Shift,f,togglefakefullscreen,
       bind=SUPER,i,minimized,
@@ -276,7 +276,7 @@ in
       bind=ALT+SHIFT,X,incgaps,1
       bind=ALT+SHIFT,Z,incgaps,-1
       bind=ALT+SHIFT,G,togglegaps
-
+      
       # movewin
       bind=CTRL+SHIFT+ALT,Up,movewin,+0,-50
       bind=CTRL+SHIFT+ALT,Down,movewin,+0,+50
@@ -577,6 +577,7 @@ in
       ### General Settings
       hide_window_decorations no
       enable_audio_bell no
+      confirm_os_window_close 0
 
       ### Colors
       #color0  #1d1f21
