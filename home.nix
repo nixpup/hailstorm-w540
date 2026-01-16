@@ -200,11 +200,16 @@ in
       bind=Alt+SHIFT,Down,exchange_client,down
       bind=Alt+SHIFT,Left,exchange_client,left
       bind=Alt+SHIFT,Right,exchange_client,right
-      
+
+      ### EXPERIMENTAL
+      bind=Alt,comma,stack_with_left
+      bind=Alt,period,unstack
+      bind=Alt,t,revert_size
+  
       # switch window status
       bind=ALT,g,toggleglobal,
       bind=SUPER,Space,toggleoverview,
-      bind=Alt,Shift,Space,togglefloating
+      #bind=Alt,Shift,Space,togglefloating
       bind=Super,Space,togglefloating
       bind=Alt+Shift,a,togglemaximizescreen,
       bind=Alt+Shift,f,togglefullscreen,
