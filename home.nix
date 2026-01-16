@@ -276,12 +276,12 @@ in
       bind=ALT+SHIFT,X,incgaps,1
       bind=ALT+SHIFT,Z,incgaps,-1
       bind=ALT+SHIFT,G,togglegaps
-      
+
       # movewin
-      bind=CTRL+SHIFT,Up,movewin,+0,-50
-      bind=CTRL+SHIFT,Down,movewin,+0,+50
-      bind=CTRL+SHIFT,Left,movewin,-50,+0
-      bind=CTRL+SHIFT,Right,movewin,+50,+0
+      bind=CTRL+SHIFT+ALT,Up,movewin,+0,-50
+      bind=CTRL+SHIFT+ALT,Down,movewin,+0,+50
+      bind=CTRL+SHIFT+ALT,Left,movewin,-50,+0
+      bind=CTRL+SHIFT+ALT,Right,movewin,+50,+0
       
       # resizewin
       bind=CTRL+ALT,Up,resizewin,+0,-50
