@@ -68,7 +68,7 @@
     };
 
     mango = {
-      url = "github:DreamMaoMao/mango";
+      url = "git+https://codeberg.org/nixpup/MangoWC.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
@@ -96,7 +96,18 @@
           nix-index-database.nixosModules.nix-index
           home-manager.nixosModules.home-manager
           mango.nixosModules.mango
-          
+          # BEGIN Unstable Channel Overlay
+          ({ config, pkgs, ... }: {
+            nixpkgs.overlays = [
+              (final: prev: {
+                unstable = import inputs.nixpkgs-unstable {
+                  system = prev.system;
+                  config.allowUnfree = config.nixpkgs.config.allowUnfree or false;
+                };
+              })
+            ];
+          })
+          # END Unstable Channel Overlay
           ({ config, pkgs, lib, ... }:
             let
               #vicinae = pkgs.callPackage ./packages/vicinae/default.nix {};
@@ -357,6 +368,10 @@
              description = "puppy";
              extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" "guixbuild" ];
              packages = with pkgs; [
+               # AI Agents
+               gemini-cli
+               unstable.claude-code
+               opencode
                # Marble Shell
                agsPkg
                #marblePkg
@@ -579,12 +594,12 @@
                  tarUnzip = "tar xvf $@";
                  tarZip = "echo 'Arg1: Archive.tar.gz, Arg2: Full Path of the Folder';tar -czvf $@";
                  # Applications
+                 gc = "git clone $@";
                  poke = "pokeget --hide-name $@";
                  weather = "curl wttr.in/Berlin $@";
                  wetter = "curl wttr.in/Berlin $@";
                  htop = "btm --theme nord $@";
                  iftop = "bandwhich $@";
-                 gc = "git clone $@";
                  cat = "bat --style full --theme=TwoDark --pager=less --paging=auto --wrap=auto $@";
                  wp = "feh --bg-fill $@";
                  forcekill = "kill -9 $@";
@@ -612,6 +627,73 @@
                  guix-update = "guix pull && guix package --upgrade && guix gc $@";
                };
                shellInit = ''
+                 # Git/G
+                 g() {
+                   local cmd="$1"
+                   local arg="$2"
+                   case "$cmd" in
+                     c|clone)
+                       if [ -z "$arg" ]; then
+                         echo "Usage: g clone <repo-url>"
+                         return 1
+                       fi
+                       git clone "$arg"
+                       ;;
+                     u|update)
+                       if [ -z "$arg" ]; then
+                         echo "g update adds a provided file to the git repo,"
+                         echo "and then tries to commit it."
+                         echo "Usage: g update <file>"
+                         return 1
+                       fi
+                       git add "$arg"
+                       printf "Commit Message: "
+                       read -r commitMessage
+                       git commit -m "$commitMessage"
+                       ;;
+                     p|push)
+                       git push origin main
+                       ;;
+                     n|new)
+                       git init
+                       ;;
+                     i|init)
+                       git init
+                       ;;
+                     a|add)
+                       if [ "$arg" = "all" ]; then
+                         git add .
+                       elif [ -z "$arg" ]; then
+                         echo "Usage: g add <file>|all"
+                         return 1
+                       else
+                         git add "$arg"
+                       fi
+                       ;;
+                     h|help|"")
+                       cat <<EOF
+                 g - git helper function
+                 
+                 Usage:
+                   g c|clone <url>        Clone a repository
+                   g u|update <file>     Add file and commit with prompt
+                   g p|push               Push to origin main
+                   g n|new                Initialize a new repository
+                   g i|init               Initialize a new repository
+                   g a|add <file>         Add a file
+                   g a|add all            Add all files
+                   g h|help               Show this help
+                 EOF
+                       ;;
+                     *)
+                       echo "Unknown command: $cmd"
+                       echo "Run 'g help' for usage."
+                       return 1
+                       ;;
+                   esac
+                 }
+
+                 # Echo Out File
                  echoout() {
                    echo "$(<"$1")"
                  }
