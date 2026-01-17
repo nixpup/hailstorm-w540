@@ -205,9 +205,11 @@ in
       bind=Alt+SHIFT,Right,exchange_client,right
 
       ### EXPERIMENTAL
-      bind=Alt,comma,stack_with_left
-      bind=Alt,period,unstack
-      bind=Alt,t,revert_size
+      bind=Alt,comma,scroller_stack_left
+      bind=Alt,period,scroller_stack_right
+      #bind=Alt,comma,stack_with_left
+      #bind=Alt,period,unstack
+      #bind=Alt,t,revert_size
   
       # switch window status
       bind=ALT,g,toggleglobal,
