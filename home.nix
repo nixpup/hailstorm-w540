@@ -6,6 +6,26 @@ let
   fullOpacity = 1.0;
 in
 {
+  # Hevel
+  #wayland.windowManager.hevel = {
+  #  enable = true;
+  #  config = {
+  #    useImage = true;
+  #    imagePath = "/home/puppy/Picture/gruvbox_pokemon_marnie_wp_dark.png";
+  #    moveEaseFactor = 0.25;
+  #    moveScrollSpeed = 20;
+  #    enableSticky = true;
+  #    scrollDragMode = false;
+  #    enableTerminalSpawning = true;
+  #    cursorTheme = "nein";
+  #    innerBorderWidth = 3;
+  #    outerBorderWidth = 3;
+  #    innerBorderColorActive = "0xffdd002b";
+  #    outerBorderColorActive = "0xffff2a54";
+  #    innerBorderColorInactive = "0xff1d1f21";
+  #    outerBorderColorInactive = "0xff050606";
+  #  };
+  #};
   # MangoWC
   wayland.windowManager.mango = {
     enable = true;
@@ -235,7 +255,8 @@ in
       bind=SUPER,e,spawn,thunar
       bind=SUPER,t,spawn,marker
       bind=SUPER,l,spawn,hyprlock
-      bind=SUPER,f,spawn,sherlock
+      bind=SUPER,f,spawn,wofi --show run
+      #bind=SUPER,f,spawn,sherlock
       bind=Alt,a,spawn,hyprshot -m region --clipboard-only
 
       # switch layout
