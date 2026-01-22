@@ -379,6 +379,14 @@ in
   home.sessionVariables = {
     XDG_DATA_DIRS = "$HOME/.guix-profile/share:$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:$XDG_DATA_DIRS";
   };
+  home.file.".scripts/pavucontrol.sh" = {
+    text = ''
+      #!/usr/bin/env bash
+
+      GSK_RENDERER=gl pavucontrol
+    '';
+    executable = true;
+  };
   # Nix-Search-TV
   home.file.".config/nix-search-tv/config.toml".text = ''
     [sources]
@@ -625,6 +633,17 @@ in
           Shift<Btn1Motion>: select-extend() \n\ 
           Shift<Btn1Up>: select-end(CLIPBOARD) \n\
   '';
+  # GTK Theme
+  gtk = {
+    theme = {
+      package = lib.mkForce pkgs.gruvbox-material-gtk-theme;
+      name = lib.mkForce "Gruvbox-Material-Dark";
+    };
+    iconTheme = {
+      package = pkgs.gruvbox-dark-icons-gtk;
+      name = "gruvbox-dark";
+    };
+  };
   # Stylix
   stylix = {
     enable = true;
