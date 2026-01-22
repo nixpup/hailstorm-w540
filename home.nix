@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, inputs, unstable, ... }:
 let
   wineWowPackagesBinary = pkgs.wineWowPackages.full;
   fontSize = 13;
@@ -6,26 +6,25 @@ let
   fullOpacity = 1.0;
 in
 {
-  # Hevel
-  #wayland.windowManager.hevel = {
-  #  enable = true;
-  #  config = {
-  #    useImage = true;
-  #    imagePath = "/home/puppy/Picture/gruvbox_pokemon_marnie_wp_dark.png";
-  #    moveEaseFactor = 0.25;
-  #    moveScrollSpeed = 20;
-  #    enableSticky = true;
-  #    scrollDragMode = false;
-  #    enableTerminalSpawning = true;
-  #    cursorTheme = "nein";
-  #    innerBorderWidth = 3;
-  #    outerBorderWidth = 3;
-  #    innerBorderColorActive = "0xffdd002b";
-  #    outerBorderColorActive = "0xffff2a54";
-  #    innerBorderColorInactive = "0xff1d1f21";
-  #    outerBorderColorInactive = "0xff050606";
-  #  };
-  #};
+  # Naitre HUD
+  wayland.windowManager.naitre = {
+    enable = true;
+    exitScript = {
+      enable = true;
+      launcher = "vicinae";
+    };
+  };
+  services.flameshot = {
+    enable = true;
+    settings = {
+      General = {
+        useGrimAdapter = true;
+        disabledGrimWarning = true;
+        savePath = "/home/puppy/Pictures/screenshots";
+        saveAsFileExtension = ".png";
+      };
+    };
+  };
   # MangoWC
   wayland.windowManager.mango = {
     enable = true;
@@ -432,6 +431,59 @@ in
     '';
     executable = true;
   };
+  home.file.".scripts/naitreHUDBackup.sh" = {
+    text = ''
+      #!/usr/bin/env bash
+      
+      backupDir="$HOME/Projects/NaitreHUD"
+      currentDate=$(date | sed 's/ /_/g')
+      defaultSourceDir="$HOME/NaitreHUD"
+      
+      mkdir -p "$backupDir"
+      read -r -p "[ Original/Source Directory? ] ~> " sourceInput
+      
+      if [[ -z "$sourceInput" ]]; then
+          read -r -p "[ No directory given. Use '$defaultSourceDir'? (Y/n) ] ~> " confirm
+          case "$confirm" in
+              ""|y|Y|yes|YES)
+                  sourceDir="$defaultSourceDir"
+                  ;;
+              *)
+                  echo "[ Aborted: no source directory selected ]"
+                  exit 1
+                  ;;
+          esac
+      else
+          sourceDir=$(eval echo "$sourceInput")
+      fi
+      
+      read -r -p "[ Add Comment to Backup Folder? ] (Comment Here:) ~> " commentContents
+      if [[ -z "$commentContents" ]]; then
+          comment=""
+      else
+          comment="$commentContents"
+      fi
+      
+      if [[ -z "$sourceDir" || ! -d "$sourceDir" ]]; then
+          echo "[ Error: '$sourceDir' is not a valid directory! ]"
+          exit 1
+      fi
+      
+      maxNum=$(ls -1 "$backupDir" 2>/dev/null \
+      	     | sed -n 's/^\([0-9]\+\)-.*/\1/p' \
+      	     | sort -n \
+      	     | tail -n 1)
+      
+      if [[ -z "$maxNum" ]]; then
+          num=1
+      else
+          num=$((maxNum + 1))
+      fi
+      
+      cp -r "$sourceDir" "$backupDir/''${num}---NaitreHUD-''${currentDate}---''${comment}"
+    '';
+    executable = true;
+  };
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;
@@ -599,7 +651,7 @@ in
       };
     };
   };
-  #home.packages = [ pkgs.OpenTabletDriver ];
+  #home.packages = [  ];
   programs.kitty = {
     enable = true;
     extraConfig = ''
