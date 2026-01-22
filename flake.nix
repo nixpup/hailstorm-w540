@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
@@ -35,7 +36,8 @@
     };
 
     noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
+      #url = "github:noctalia-dev/noctalia-shell";
+      url = "github:nixpup/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
@@ -57,8 +59,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-
     nix-alien = {
       url = "github:thiagokokada/nix-alien";
     };
@@ -68,15 +68,15 @@
     };
 
     mango = {
-      #url = "path:/home/puppy/Worker/MangoWC";
-      url = "github:nixpup/MangoPup"; # Add "?ref=vertical-stack" to the url end for specific branch.
+      url = "github:DreamMaoMao/mango"; # Add "?ref=vertical-stack" to the url end for specific branch.
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    #hevel = {
-    #  url = "path:/home/puppy/Worker/hevel";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    naitre = {
+      #url = "path:/home/puppy/Worker/NaitreHUD"; #/home/puppy/Projects/NaitreHUD
+      url = "github:nixpup/NaitreHUD";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     
   };
 
@@ -85,7 +85,7 @@
               nix-index-database, nixmacs,
               nixvim, noctalia, nix-alien,
               nix-search-tv, astal, ags, vicinae,
-              mango, ... }: # Add 'hevel' here.
+              mango, naitre, nixpkgs-unstable, ... }:
     let
       system = "x86_64-linux";
       agsPkg = ags.packages.${system}.default;
@@ -102,6 +102,7 @@
           nix-index-database.nixosModules.nix-index
           home-manager.nixosModules.home-manager
           mango.nixosModules.mango
+          naitre.nixosModules.naitre
           # BEGIN Unstable Channel Overlay
           ({ config, pkgs, ... }: {
             nixpkgs.overlays = [
@@ -144,7 +145,7 @@
                   inputs.noctalia.homeModules.default # Noctalia
                   vicinae.homeManagerModules.default # Vicinae
                   inputs.mango.hmModules.mango # MangoWC
-                  #hevel.homeManagerModules.default # Hevel
+                  inputs.naitre.hmModules.naitre # MangoWC
                 ];
                 backupFileExtension = "backup";
               };
@@ -158,14 +159,6 @@
               boot.kernelParams = [ "systemd.unit=rescue.target" ];
             };
             boot.loader.grub = {
-              #extraEntries = ''
-              #  menuentry "Rescue" {
-              #    set root=(hd0,1)
-              #    linux ($drive1)/EFI/nixos/kernel-${config.boot.kernelPackages.kernel.modDirVersion} \
-              #      systemd.unit=rescue.target
-              #    initrd ($drive1)/EFI/nixos/initrd-${config.boot.kernelPackages.kernel.modDirVersion}
-              #  }
-              #'';
               device = "/dev/sda";
               theme = pkgs.stdenv.mkDerivation {
                 pname = "distro-grub-themes";
@@ -244,23 +237,6 @@
               ];
             };
             # END Grok Nvidia Application Profile
-            # BEGIN Perplexity Recommendation Service | Apparently not required when using
-            # GDM as your display manager as that would handle Niri and the launch of the session.
-            #systemd.user.services.niri = {
-            #  enable = true;
-            #  unitConfig = {
-            #    Description = "Niri compositor";
-            #  };
-            #  serviceConfig = {
-            #    ExecStart = ''
-            #      env \
-            #        GBM_BACKENDS_PATH=${pkgs.mesa.drivers}/lib/gbm \
-            #        niri --session
-            #    '';
-            #  };
-            #  wantedBy = [ "graphical-session.target" ];
-            #};
-            # END Perplexity Recommendation Service
             # BEGIN Claude Variables
             environment.sessionVariables = {
               LIBVA_DRIVER_NAME = "nvidia";
@@ -290,23 +266,9 @@
                 #};
               };
             };
-            # Fingerprint Sensor
-            #services.fprintd = {
-            #  enable = true;
-            #  tod = {
-            #    enable = true;
-            #    driver = pkgs.libfprint-2-tod1-goodix;
-            #  };
-            #};
-            #security.pam.services = {
-            #  login.enable = false;
-            #  gdm = {
-            #    enable = true;
-            #  };
-            #  sudo.enable = false;
-            #};
             # Enable the X11 windowing system.
             programs.mango.enable = true;
+            programs.naitre.enable = true;
             programs.xwayland.enable = true;
             services.xserver = {
               videoDrivers = [ "nvidia" ];
@@ -376,7 +338,8 @@
              extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" "guixbuild" ];
              packages = with pkgs; [
                # AI Agents
-               gemini-cli
+               # gemini-cli
+               unstable.gemini-cli-bin
                unstable.claude-code
                opencode
                # Marble Shell
@@ -384,6 +347,9 @@
                #marblePkg
                pkgs.pnpm
                # END
+               gpu-screen-recorder
+               imv
+               yazi
                edwood
                gamescope
                microsoft-edge
@@ -584,6 +550,7 @@
                  pf = "pridefetch -f trans --width 11 $@";
                  mf = "microfetch $@";
                  ff = "fastfetch $@";
+                 ffl = "fastfetch --logo-type kitty --logo $@";
                  pef = "pfetch $@";
                  distro = "cat /etc/*-release | grep 'PRETTY_NAME' | cut -c 13- | sed 's/\"//g'";
                  lsbOsRelease = "lsb_release -sd $@";
@@ -602,6 +569,7 @@
                  tarUnzip = "tar xvf $@";
                  tarZip = "echo 'Arg1: Archive.tar.gz, Arg2: Full Path of the Folder';tar -czvf $@";
                  # Applications
+                 explorer = "yazi $@";
                  gc = "git clone $@";
                  poke = "pokeget --hide-name $@";
                  weather = "curl wttr.in/Berlin $@";
@@ -1164,7 +1132,7 @@
            };
            systemd.services.tor.wantedBy = lib.mkForce [ ];
 
-            services.displayManager.defaultSession = "mango";            
+            services.displayManager.defaultSession = "naitre";            
             #services.displayManager.defaultSession = "niri";
             # Enable CUPS to print documents.
             services.printing.enable = true;
