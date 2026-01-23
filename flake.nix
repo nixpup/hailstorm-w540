@@ -702,6 +702,13 @@
                        git add ./*
                        echo "[ Added all Files ]"
                        ;;
+                     s|status)
+                       echo "[ Status ]"
+                       git status
+                       echo "[ Remote Sources ]"
+                       git remote -v
+                       echo "[ Branches ]"
+                       echo "$(git branch --list)"
                      h|help|"")
                        cat <<EOF
                  g - git helper function
@@ -715,6 +722,8 @@
                    g i|init               Initialize a new repository
                    g a|add <file>         Add a file
                    g a|add all            Add all files
+                   g aa                   Add all files
+                   g s|status             Show various status reports/infos
                    g h|help               Show this help
                  EOF
                        ;;
