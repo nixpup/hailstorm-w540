@@ -513,6 +513,7 @@ in
       enable = true;
       layout = "qwerty";
     };
+    waylandPackage.enable = true;
   };
   # NixVim
   programs.nixvim = {

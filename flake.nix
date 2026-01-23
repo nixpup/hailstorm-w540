@@ -25,7 +25,9 @@
     # Run 'doas nix flake update nixmacs' after changes to
     # the repository to rebuild with latest changes!
     nixmacs = {
-      url = "git+https://codeberg.org/nixpup/NixMacs.git";
+      #url = "git+https://codeberg.org/nixpup/NixMacs.git";
+      url = "github:nixpup/NixMacs";
+      #url = "path:/home/puppy/NixMacs";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
@@ -121,6 +123,7 @@
               synapsian = pkgs.callPackage ./packages/synapsian/default.nix {};
               karamarea = pkgs.callPackage ./packages/karamarea/default.nix {};
               osuLazerLatest = pkgs.callPackage ./packages/osuLazerLatest.nix {};
+              urbitNcl = pkgs.callPackage ./packages/urbit/default.nix {};
             in {
             # Replace the let-bindings in configuration.nix with these, or
             # delete them from configuration.nix entirely and rely on imports here.
@@ -150,7 +153,7 @@
                 backupFileExtension = "backup";
               };
 
-            # NixOS Configuration
+            # NixOS Configuration            
             # Kernel
             boot.kernelPackages = pkgs.linuxPackages;
             boot.kernelParams = [ "nvidia-drm.modeset=1" ];
@@ -337,16 +340,12 @@
              description = "puppy";
              extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" "guixbuild" ];
              packages = with pkgs; [
-               # AI Agents
-               # gemini-cli
+               sway-audio-idle-inhibit
                unstable.gemini-cli-bin
                unstable.claude-code
                opencode
-               # Marble Shell
                agsPkg
-               #marblePkg
                pkgs.pnpm
-               # END
                gpu-screen-recorder
                imv
                yazi
@@ -442,7 +441,6 @@
                skyemu # GameBoy Advanced Emulator
                prismlauncher # Minecraft
                # Networks
-               urbit
                librewolf-bin # For I2P
                tor-browser # For Tor
                # Haskell
@@ -680,7 +678,7 @@
                        git commit -m "$commitMessage"
                        ;;
                      p|push)
-                       git push origin main
+                       git push -u origin main
                        ;;
                      n|new)
                        git init
@@ -697,6 +695,12 @@
                        else
                          git add "$arg"
                        fi
+                       ;;
+                     aa|addall)
+                       git add .
+                       git add *
+                       git add ./*
+                       echo "[ Added all Files ]"
                        ;;
                      h|help|"")
                        cat <<EOF
@@ -1058,12 +1062,14 @@
              inherit (self.inputs.nix-alien.packages.${system});
              nix-alien = self.inputs.nix-alien.packages.${system}.default;
            in [
+             nickel
              wget
              emacs-wayland
              emacs-x11
              irssi
              home-manager
              osuLazerLatest
+             urbitNcl
              libelf
              gnumake
              gcc
