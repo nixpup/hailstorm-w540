@@ -94,7 +94,7 @@ in
       blur_params_brightness = 0.9
       blur_params_contrast = 0.9
       blur_params_saturation = 1.2
-      
+
       shadows = 1
       layer_shadows = 0
       shadow_only_floating = 1
@@ -103,12 +103,12 @@ in
       shadows_position_x = 0
       shadows_position_y = 0
       shadowscolor= 0x000000ff
-      
+
       border_radius=6
       no_radius_when_single=0
       focused_opacity=1.0
       unfocused_opacity=0.8
-      
+
       # Animation Configuration(support type:zoom,slide)
       # tag_animation_direction: 1-horizontal,0-vertical
       animations=1
@@ -137,7 +137,7 @@ in
       animation_curve_focus=0.46,1.0,0.29,1
       animation_curve_opafadeout=0.5,0.5,0.5,0.5
       animation_curve_opafadein=0.46,1.0,0.29,1
-      
+
       # Scroller Layout Setting
       scroller_structs=20
       scroller_default_proportion=0.8
@@ -146,20 +146,20 @@ in
       edge_scroller_pointer_focus=1
       scroller_default_proportion_single=1.0
       scroller_proportion_preset=0.5,0.8,1.0
-      
+
       # Master-Stack Layout Setting
       new_is_master=1
       default_mfact=0.55
       default_nmaster=1
       smartgaps=0
-      
+
       # Overview Setting
       hotarea_size=10
       enable_hotarea=1
       ov_tab_mode=0
       overviewgappi=5
       overviewgappo=30
-      
+
       # Misc
       no_border_when_single=0
       axis_bind_apply_timeout=100
@@ -185,12 +185,12 @@ in
       left_handed=0
       middle_button_emulation=0
       swipe_min_threshold=1
-      
+
       # mouse
       # need relogin to make it apply
       mouse_natural_scrolling=0
       sloppyfocus=1
-      
+
       # Appearance
       gappih=5
       gappiv=5
@@ -207,7 +207,7 @@ in
       scratchpadcolor=0x516c93ff
       globalcolor=0xb153a7ff
       overlaycolor=0x14a57cff
-      
+
       # layout support:
       # tile,scroller,grid,deck,monocle,center_tile,vertical_tile,vertical_scroller
       tagrule=id:1,layout_name:scroller
@@ -219,14 +219,14 @@ in
       tagrule=id:7,layout_name:grid
       tagrule=id:8,layout_name:center_tile
       tagrule=id:9,layout_name:vertical_tile
-      
+
       # reload config
       bind=Alt+Shift,r,reload_config
-      
+
       # menu and terminal
       bind=Alt,f,spawn,vicinae open
       bind=Alt+Shift,Return,spawn,kitty
-      
+
       # exit
       #bind=Alt+Shift,x,quit
       bind=Alt+Shift,x,spawn,~/.scripts/mango-exit.sh
@@ -238,7 +238,7 @@ in
       bind=ALT,Right,focusdir,right
       bind=ALT,Up,focusdir,up
       bind=ALT,Down,focusdir,down
-      
+
       # swap window
       bind=Alt+SHIFT,Up,exchange_client,up
       bind=Alt+SHIFT,Down,exchange_client,down
@@ -248,7 +248,7 @@ in
       # stacker
       bind=Alt,comma,scroller_stack_left
       bind=Alt,period,scroller_stack_right
-  
+
       # switch window status
       bind=ALT,g,toggleglobal,
       bind=SUPER,Space,toggleoverview,
@@ -261,7 +261,7 @@ in
       bind=SUPER+SHIFT,I,restore_minimized
       bind=SUPER+CTRL,i,toggle_scratchpad
       bind=SUPER,o,toggleoverlay,
-      
+
       # scroller layout
       #bind=ALT,e,set_proportion,1.0
       bind=ALT+SHIFT,a,set_proportion,1.0
@@ -279,7 +279,7 @@ in
 
       # switch layout
       bind=Alt,space,switch_layout
-      
+
       # tag switch
       bind=SUPER,Left,viewtoleft,0
       bind=CTRL+Super+Shift,Left,viewtoleft_have_client,0
@@ -287,7 +287,7 @@ in
       bind=CTRL+SUPER+Shift,Right,viewtoright_have_client,0
       bind=CTRL+SUPER,Left,tagtoleft,0
       bind=CTRL+SUPER,Right,tagtoright,0
-      
+
       bind=Alt,1,view,1,0
       bind=Alt,2,view,2,0
       bind=Alt,3,view,3,0
@@ -297,7 +297,7 @@ in
       bind=Alt,7,view,7,0
       bind=Alt,8,view,8,0
       bind=Alt,9,view,9,0
-      
+
       # tag: move client to the tag and focus it
       # tagsilent: move client to the tag and not focus it
       # bind=Alt,1,tagsilent,1
@@ -310,24 +310,24 @@ in
       bind=Alt+Shift,7,tag,7,0
       bind=Alt+Shift,8,tag,8,0
       bind=Alt+Shift,9,tag,9,0
-      
+
       # monitor switch
       bind=alt+shift,ctrl,Left,focusmon,left
       bind=alt+shift,ctrl,Right,focusmon,right
       bind=SUPER+Alt,Left,tagmon,left
       bind=SUPER+Alt,Right,tagmon,right
-      
+
       # gaps
       bind=ALT+SHIFT,X,incgaps,1
       bind=ALT+SHIFT,Z,incgaps,-1
       bind=ALT+SHIFT,G,togglegaps
-      
+
       # movewin
       bind=CTRL+SHIFT+ALT,Up,movewin,+0,-50
       bind=CTRL+SHIFT+ALT,Down,movewin,+0,+50
       bind=CTRL+SHIFT+ALT,Left,movewin,-50,+0
       bind=CTRL+SHIFT+ALT,Right,movewin,+50,+0
-      
+
       # resizewin
       bind=CTRL+ALT,Up,resizewin,+0,-50
       bind=CTRL+ALT,Down,resizewin,+0,+50
@@ -338,7 +338,7 @@ in
       bind=CTRL+ALT,j,resizewin,+0,+10 # Down
       bind=CTRL+ALT,k,resizewin,+0,-10 # Up
       bind=CTRL+ALT,l,resizewin,+10,+0 # Right
-      
+
       # Mouse Button Bindings
       # NONE mode key only work in ov mode
       mousebind=ALT,btn_left,moveresize,curmove
@@ -346,11 +346,11 @@ in
       mousebind=ALT,btn_right,moveresize,curresize
       mousebind=NONE,btn_left,toggleoverview,1
       mousebind=NONE,btn_right,killclient,0
-      
+
       # Axis Bindings
       axisbind=SUPER,UP,viewtoleft_have_client
       axisbind=SUPER,DOWN,viewtoright_have_client
-      
+
       # layer rule
       layerrule=animation_type_open:zoom,layer_name:rofi
       layerrule=animation_type_close:zoom,layer_name:rofi
@@ -398,32 +398,43 @@ in
   home.sessionVariables = {
     XDG_DATA_DIRS = "$HOME/.guix-profile/share:$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:$XDG_DATA_DIRS";
   };
-  home.file.".config/btop/btop.conf" = {
-    source = ./files/config/btop/btop.conf;
+  # Btop
+  home.file = {
+    ".config/btop/btop.conf".source = ./files/config/btop/btop.conf;
+    ".config/btop/themes/rumda.theme".source = ./files/config/btop/themes/rumda.theme;
   };
-  home.file.".config/btop/themes/rumda.theme" = {
-    source = ./files/config/btop/themes/rumda.theme;
+  # Hyprlock
+  home.file = {
+    ".config/hyprlock/hyprlock.conf".source = ./files/config/hyprlock/hyprlock.conf;
+    ".config/hyprlock/hyprlock.png".source = ./files/config/hyprlock/hyprlock.png;
+    ".config/hyprlock/songdetail.sh".source = ./files/config/hyprlock/songdetail.sh;
+    ".config/hyprlock/vivek.jpg".source = ./files/config/hyprlock/vivek.jpg;
+    ".config/hyprlock/Fonts/JetBrains/JetBrains Mono Nerd.ttf".source = ./files/config/hyprlock/Fonts/JetBrains/JetBrains_Mono_Nerd.ttf;
+    ".config/hyprlock/Fonts/SF Pro Display/SF Pro Display Bold.otf".source = ./files/config/hyprlock/Fonts/SF_Pro_Display/SF_Pro_Display_Bold.otf;
+    ".config/hyprlock/Fonts/SF Pro Display/SF Pro Display Regular.otf".source = ./files/config/hyprlock/Fonts/SF_Pro_Display/SF_Pro_Display_Regular.otf;
   };
-  home.file.".config/hyprlock/hyprlock.conf" = {
-    source = ./files/config/hyprlock/hyprlock.conf;
+ # Zathura
+  home.file.".config/zathura/zathurarc" = {
+    source = ./files/config/zathura/zathurarc;
   };
-  home.file.".config/hyprlock/hyprlock.png" = {
-    source = ./files/config/hyprlock/hyprlock.png;
+  # Wallpapers
+  home.file = {
+    "Pictures/Wallpapers/marnieGruvbox.png".source = ./files/pictures/marnieGruvbox.png;
+    "Pictures/Wallpapers/demeLook.jpg".source = ./files/pictures/demeLook.jpg;
+    "Pictures/Wallpapers/helltakerStare.jpg".source = ./files/pictures/helltakerStare.jpg;
+    "Pictures/Wallpapers/lainGruvbox.jpg".source = ./files/pictures/lainGruvbox.jpg;
+    "Pictures/Wallpapers/nixosAnime.png".source = ./files/pictures/nixosAnime.png;
   };
-  home.file.".config/hyprlock/songdetail.sh" = {
-    source = ./files/config/hyprlock/songdetail.sh;
+  # Rofi
+  home.file = {
+    ".config/rofi/colors.rasi".source = ./files/config/rofi/colors.rasi;
+    ".config/rofi/config.rasi".source = ./files/config/rofi/config.rasi;
+    ".config/rofi/fonts.rasi".source = ./files/config/rofi/fonts.rasi;
   };
-  home.file.".config/hyprlock/vivek.jpg" = {
-    source = ./files/config/hyprlock/vivek.jpg;
-  };
-  home.file.".config/hyprlock/Fonts/JetBrains/JetBrains Mono Nerd.ttf" = {
-    source = ./files/config/hyprlock/Fonts/JetBrains/JetBrains_Mono_Nerd.ttf;
-  };
-  home.file.".config/hyprlock/Fonts/SF Pro Display/SF Pro Display Bold.otf" = {
-    source = ./files/config/hyprlock/Fonts/SF_Pro_Display/SF_Pro_Display_Bold.otf;
-  };
-  home.file.".config/hyprlock/Fonts/SF Pro Display/SF Pro Display Regular.otf" = {
-    source = ./files/config/hyprlock/Fonts/SF_Pro_Display/SF_Pro_Display_Regular.otf;
+  # Yazi
+  home.file = {
+    ".config/yazi/Gruvbox-Dark.tmTheme".source = ./files/config/yazi/Gruvbox-Dark.tmTheme;
+    ".config/yazi/theme.toml".source = ./files/config/yazi/theme.toml;
   };
   # Nix-Search-TV
   home.file.".config/nix-search-tv/config.toml".text = ''
@@ -448,27 +459,27 @@ in
       "cache_dir": "/home/puppy/.cache/nix-search-tv",
       "enable_waiting_message": true
     }
-  '';  
+  '';
   home.file.".config/television/cable/nix.toml".text = ''
     [metadata]
     name = "nix"
     requirements = ["nix-search-tv"]
-    
+
     [source]
     command = "nix-search-tv print"
-    
+
     [preview]
     command = "nix-search-tv preview {}"
   '';
   home.file.".scripts/mango-exit.sh" = {
     text = ''
       #!/usr/bin/env sh
-      
+
       choice=$(printf "no\nyes" | wofi --dmenu \
         --prompt "Exit MangoWC?" \
         --width 300 \
         --height 150)
-      
+
       if [ "$choice" = "yes" ]; then
           kill $(pidof mango)
       else
@@ -480,14 +491,14 @@ in
   home.file.".scripts/naitreHUDBackup.sh" = {
     text = ''
       #!/usr/bin/env bash
-      
+
       backupDir="$HOME/Projects/NaitreHUD"
       currentDate=$(date | sed 's/ /_/g')
       defaultSourceDir="$HOME/NaitreHUD"
-      
+
       mkdir -p "$backupDir"
       read -r -p "[ Original/Source Directory? ] ~> " sourceInput
-      
+
       if [[ -z "$sourceInput" ]]; then
           read -r -p "[ No directory given. Use '$defaultSourceDir'? (Y/n) ] ~> " confirm
           case "$confirm" in
@@ -502,30 +513,30 @@ in
       else
           sourceDir=$(eval echo "$sourceInput")
       fi
-      
+
       read -r -p "[ Add Comment to Backup Folder? ] (Comment Here:) ~> " commentContents
       if [[ -z "$commentContents" ]]; then
           comment=""
       else
           comment="$commentContents"
       fi
-      
+
       if [[ -z "$sourceDir" || ! -d "$sourceDir" ]]; then
           echo "[ Error: '$sourceDir' is not a valid directory! ]"
           exit 1
       fi
-      
+
       maxNum=$(ls -1 "$backupDir" 2>/dev/null \
       	     | sed -n 's/^\([0-9]\+\)-.*/\1/p' \
       	     | sort -n \
       	     | tail -n 1)
-      
+
       if [[ -z "$maxNum" ]]; then
           num=1
       else
           num=$((maxNum + 1))
       fi
-      
+
       cp -r "$sourceDir" "$backupDir/''${num}---NaitreHUD-''${currentDate}---''${comment}"
     '';
     executable = true;
@@ -657,10 +668,10 @@ in
     xterm*locale: true
     xterm*utf8: 2
     XTerm*VT100.Translations: #override \
-          Shift Ctrl<Key>V: insert-selection(CLIPBOARD) \n\ 
-          Shift Ctrl<Key>V: insert-selection(PRIMARY) \n\ 
-          Shift<Btn1Down>: select-start() \n\ 
-          Shift<Btn1Motion>: select-extend() \n\ 
+          Shift Ctrl<Key>V: insert-selection(CLIPBOARD) \n\
+          Shift Ctrl<Key>V: insert-selection(PRIMARY) \n\
+          Shift<Btn1Down>: select-start() \n\
+          Shift<Btn1Motion>: select-extend() \n\
           Shift<Btn1Up>: select-end(CLIPBOARD) \n\
   '';
   # GTK Theme
@@ -728,7 +739,7 @@ in
       #color12 #81a2be
       #color13 #b77ee0
       #color14 #54ced6
-      #color15 #282a2e 
+      #color15 #282a2e
       #foreground            #c5c8c6
       #background            #1d1f21
 
@@ -768,10 +779,10 @@ in
       cursor_blink_interval 0
       #cursor                #ffffff
       #cursor_text_color     #1d1f21
-      
+
       ### Font
       font_family DejaVu Sans Mono
-      font_size 13.0
+      font_size 16.0
 
       ### Tabs
       tab_bar_style separator
@@ -970,7 +981,7 @@ in
     	"class_g = 'Thunderbird' && (window_type = 'utility' || window_type = 'popup_menu') && argb",
     	"class_g = 'Mozilla Thunderbird' && (window_type = 'utility' || window_type = 'popup_menu') && argb",
         "class_g ?= 'Xfce4-power-manager'",
-    	# 
+    	#
     	# Exclude Vokoscreen and VokoscreenNG area selector
     	#
     	"class_g ?= 'vokoscreen' && argb",
@@ -1045,7 +1056,7 @@ in
     	dnd = { shadow = false; }
     	popup_menu = { opacity = 1; }
     	dropdown_menu = { opacity = 1; }
-    
+
     };
   '';
   home.file.".scripts/polybar.sh" = {
@@ -1064,10 +1075,10 @@ in
     text = ''
       #!/usr/bin/env bash
       # View Screenshots from your Clipboard
-      
+
       # Define randomized Filename
       fileName=$((10000 + $RANDOM % 1000000000))
-      
+
       # If image in clipboard, run process; else send error notification.
       if xclip -selection clipboard -t image/png -o &> /dev/null; then
           # Export clipboard image to /home/$USER/ with a random file name.
@@ -1207,20 +1218,20 @@ in
 
     [experimental]
         per_monitor_dpi = false
-    
+
     [urgency_low]
         background = "#222222"
         foreground = "#888888"
         timeout = 5
         default_icon = dialog-information
-    
+
     [urgency_normal]
         background = "#1d1f21"
         foreground = "#ffffff"
         timeout = 5
         override_pause_level = 30
         default_icon = dialog-information
-    
+
     [urgency_critical]
         background = "#900000"
         foreground = "#ffffff"
@@ -1271,7 +1282,7 @@ in
     @define-color fg0      #C5C8C6;
     @define-color accent   #FF2A54;
     @define-color urgent   #A54242;
-    
+
     * {
         font-family: "DejaVu Sans Mono", monospace;
         font-size: 14px;
@@ -1337,14 +1348,14 @@ in
         color: @bg0;
     }
   '';
-  home.file.".config/rofi/config.rasi".text = ''
+  home.file.".config/rofi/old/config.rasi".text = ''
     configuration {
       font: "DejaVu Sans Mono 12";
       show-icons: true;
       location: 0;
       fullscreen: false;
     }
-    
+
     @theme "squared-loji"
   '';
   home.file.".scripts/wineOsuSetup.sh" = {
@@ -1417,11 +1428,11 @@ in
     '';
     executable = true;
   };
-  home.file.".config/rofi/squared-nord.rasi".text = ''
+  home.file.".config/rofi/old/squared-nord.rasi".text = ''
     /* Rofi Squared Nord  */
     /* Author: Nixpup (https://codeberg.org/nixpup) */
     /* Original Author: Newman Sanchez (https://github.com/newmanls) */
-    
+
     * {
         /*font:   "FiraCode Nerd Font Medium 12";*/
         font: "DejaVu Sans Mono Regular 14";
@@ -1447,13 +1458,13 @@ in
         location:   center;
         width:      480;
         border-radius: 0px;
-    
+
         background-color:   @bg0;
     }
     inputbar {
         spacing:    8px;
         padding:    8px;
-    
+
         background-color:   @bg1;
     }
     prompt, entry, element-icon, element-text {
@@ -1471,7 +1482,7 @@ in
         padding:    4px 0;
         lines:      8;
         columns:    1;
-    
+
         fixed-height:   false;
     }
     element {
@@ -1506,11 +1517,11 @@ in
         text-color: inherit;
     }
   '';
-  home.file.".config/rofi/squared-loji.rasi".text = ''
+  home.file.".config/rofi/old/squared-loji.rasi".text = ''
     /* Rofi Squared Loji  */
     /* Author: Nixpup (https://codeberg.org/nixpup) */
     /* Original Author: Newman Sanchez (https://github.com/newmanls) */
-    
+
     * {
         font: "DejaVu Sans Mono Regular 14";
         bg0: #282A2E;
@@ -1528,13 +1539,13 @@ in
         location:   center;
         width:      480;
         border-radius: 0px;
-    
+
         background-color:   @bg0;
     }
     inputbar {
         spacing:    8px;
         padding:    8px;
-    
+
         background-color:   @bg1;
     }
     prompt, entry, element-icon, element-text {
@@ -1552,7 +1563,7 @@ in
         padding:    4px 0;
         lines:      8;
         columns:    1;
-    
+
         fixed-height:   false;
     }
     element {

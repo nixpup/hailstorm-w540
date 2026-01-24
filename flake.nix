@@ -330,6 +330,7 @@
            # Fonts
            fonts = {
              packages = with pkgs; [
+               cartographCF
                synapsian
                karamarea
                noto-fonts
@@ -1154,12 +1155,12 @@
              enable = true;
              daemon = {
                settings = {
-                 data-root = "/Mount/docker/";
+                 data-root = "/mnt/docker/";
                };
              };
            };
 
-           fileSystems."/Mount" = {
+           fileSystems."/mnt" = {
              device = "/dev/disk/by-uuid/1393f521-37bc-4a53-bfb1-e74c2e454534";
              fsType = "ext4";
              options = [ "defaults" ];
