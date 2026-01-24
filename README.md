@@ -28,11 +28,13 @@ Remember to make backups of all the files in your `/etc/nixos` directory, and va
    cp home.nix /etc/nixos
    cp -r packages/ /etc/nixos
    cp -r files /etc/nixos
-   ```  
+   ```
 4. Change the flake.nix (`nixosConfigurations.hailstorm = nixpkgs.lib.nixosSystem {`) to reflect your desired hostname. (Replace `hailstorm`.)
 5. Change all instances of `puppy` in the flake.nix and home.nix to your actual username. (Find out by running `whoami`.)
 6. `sudo nixos-rebuild switch --flake /etc/nixos#YOURHOSTNAME`
 7. Reboot and enjoy!
 
 ## Screenshot
-![Screenshot](https://raw.githubusercontent.com/nixpup/hailstorm-w540/refs/heads/main/hailstorm.png)
+![Screenshot 1](https://raw.githubusercontent.com/nixpup/hailstorm-w540/refs/heads/main/fuwa01.png)
+![Screenshot 2](https://raw.githubusercontent.com/nixpup/hailstorm-w540/refs/heads/main/fuwa02.png)
+![Screenshot 3](https://raw.githubusercontent.com/nixpup/hailstorm-w540/refs/heads/main/fuwa03.png)
