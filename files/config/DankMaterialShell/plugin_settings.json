@@ -1,0 +1,13 @@
+{
+  "dankBatteryAlerts": {
+    "enabled": true,
+    "criticalThreshold": 30,
+    "warningThreshold": 50
+  },
+  "powerOptions": {
+    "enabled": true
+  },
+  "sessionPower": {
+    "enabled": true
+  }
+}

@@ -398,6 +398,13 @@ in
   home.sessionVariables = {
     XDG_DATA_DIRS = "$HOME/.guix-profile/share:$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:$XDG_DATA_DIRS";
   };
+  # DMS Shell
+  home.file = {
+    ".config/DankMaterialShell/themes/gruvboxMaterial".source = ./files/config/DankMaterialShell/themes/gruvboxMaterial;
+    ".config/DankMaterialShell/firefox.css".source = ./files/config/DankMaterialShell/firefox.css;
+    ".config/DankMaterialShell/plugin_settings.json".source = ./files/config/DankMaterialShell/plugin_settings.json;
+    ".config/DankMaterialShell/settings.json".source = ./files/config/DankMaterialShell/settings.json;
+  };
   # Btop
   home.file = {
     ".config/btop/btop.conf".source = ./files/config/btop/btop.conf;
