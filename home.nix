@@ -431,6 +431,7 @@ in
     "Pictures/Wallpapers/helltakerStare.jpg".source = ./files/pictures/helltakerStare.jpg;
     "Pictures/Wallpapers/lainGruvbox.jpg".source = ./files/pictures/lainGruvbox.jpg;
     "Pictures/Wallpapers/nixosAnime.png".source = ./files/pictures/nixosAnime.png;
+    "Pictures/Wallpapers/fuwamoco.jpg".source = ./files/pictures/fuwamoco.jpg;
   };
   # Rofi
   home.file = {
