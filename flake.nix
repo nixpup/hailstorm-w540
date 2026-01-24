@@ -2,18 +2,18 @@
   description = "NixOS configuration for hailstorm (flake-based)";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/v0.6.0";
 
     stylix = {
-      url = "github:nix-community/stylix/release-25.05";
+      url = "github:nix-community/stylix/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -33,7 +33,7 @@
     };
 
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-25.05";
+      url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -79,18 +79,26 @@
       url = "github:nixpup/NaitreHUD";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    dgop = {
+      url = "github:AvengeMedia/dgop";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, # Added 'inputs@'
-              nix-flatpak, stylix,
-              nix-index-database, nixmacs,
-              nixvim, noctalia, nix-alien,
-              nix-search-tv, astal, ags, vicinae,
-              mango, naitre, nixpkgs-unstable, ... }:
+  # Added 'inputs@' to 'outputs ='.
+  outputs = inputs@{ self, nixpkgs, home-manager, nix-flatpak, stylix, nix-index-database, nixmacs, nixvim, noctalia, nix-alien,
+                     nix-search-tv, astal, ags, vicinae, mango, naitre, nixpkgs-unstable, dms, dgop, ... }:
     let
       system = "x86_64-linux";
-      agsPkg = ags.packages.${system}.default;
+      #agsPkg = ags.${system}.default;
+      ags = inputs.ags.packages.x86_64-linux.default;
     in {
       nixosConfigurations.hailstorm = nixpkgs.lib.nixosSystem {
         inherit system;
@@ -124,12 +132,15 @@
               karamarea = pkgs.callPackage ./packages/karamarea/default.nix {};
               osuLazerLatest = pkgs.callPackage ./packages/osuLazerLatest.nix {};
               urbitNcl = pkgs.callPackage ./packages/urbit/default.nix {};
+              epdfinfoPkg = pkgs.callPackage ./packages/epdfinfo/default.nix {};
+              cartographCF = pkgs.callPackage ./packages/cartographCF/default.nix {};
             in {
             # Replace the let-bindings in configuration.nix with these, or
             # delete them from configuration.nix entirely and rely on imports here.
 
               # Use the Home Manager NixOS module from the flake input
               imports = [
+                inputs.dms.nixosModules.dank-material-shell # DMS Shell
                 home-manager.nixosModules.home-manager
                 nix-flatpak.nixosModules.nix-flatpak
                 ./hardware-configuration.nix
@@ -149,11 +160,16 @@
                   vicinae.homeManagerModules.default # Vicinae
                   inputs.mango.hmModules.mango # MangoWC
                   inputs.naitre.hmModules.naitre # Naitre HUD
+                  inputs.dms.homeModules.dank-material-shell # DMS Shell
                 ];
                 backupFileExtension = "backup";
               };
 
             # NixOS Configuration            
+            # PATH
+              environment.sessionVariables = {
+                PATH = "/run/current-system/sw/bin:/run/wrappers/bin:$PATH";
+              };
             # Kernel
             boot.kernelPackages = pkgs.linuxPackages;
             boot.kernelParams = [ "nvidia-drm.modeset=1" ];
@@ -177,7 +193,7 @@
             };
             # networking.wireless.enable = true;  # Enables wireless w/ wpa_supplicant.
             services.udev = {
-              packages = [ pkgs.utillinux ];
+              packages = [ pkgs.util-linux ];
               extraRules = ''
                 # Wacom CTH-480 for OpenTabletDriver (OTD)
                 SUBSYSTEM=="hidraw", ATTRS{idVendor}=="056a", ATTRS{idProduct}=="0302", MODE="0666", GROUP="plugdev"
@@ -269,22 +285,27 @@
                 #};
               };
             };
-            # Enable the X11 windowing system.
-            programs.mango.enable = true;
-            programs.naitre.enable = true;
-            programs.xwayland.enable = true;
+            # Xorg and Wayland
+            programs = {
+              mango.enable = true;
+              naitre.enable = true;
+              xwayland.enable = true;
+            };
+            services = {
+              desktopManager = {
+                gnome.enable = true;
+              };
+              displayManager = {
+                gdm = {
+                  enable = true;
+                  wayland = true;
+                };
+              };
+            };
             services.xserver = {
               videoDrivers = [ "nvidia" ];
               enable = true;
               xkb.layout = "us";
-              displayManager = {
-                gdm.wayland = true;
-                gdm.enable = true;
-              };
-              desktopManager = {
-                gnome.enable = true;
-                xterm.enable = true;
-              };
               windowManager.xmonad = {
                 enable = true;
                 enableContribAndExtras = true;
@@ -340,11 +361,16 @@
              description = "puppy";
              extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" "guixbuild" "docker" ];
              packages = with pkgs; [
+               kdePackages.qt5compat
+               unstable.quickshell
+               btop
+               onefetch
                sway-audio-idle-inhibit
                unstable.gemini-cli-bin
                unstable.claude-code
                opencode
-               agsPkg
+               #agsPkg
+               ags
                pkgs.pnpm
                gpu-screen-recorder
                imv
@@ -405,7 +431,6 @@
                progress
                openssl
                coreutils-full
-               coreutils-prefixed
                nix-prefetch-scripts
                obs-studio
                libreoffice
@@ -438,7 +463,8 @@
                ace-of-penguins
                kdePackages.kpat
                azahar # 3DS Emulator
-               ryujinx # Switch Emulator
+               #ryujinx # Switch Emulator
+               ryubing
                skyemu # GameBoy Advanced Emulator
                prismlauncher # Minecraft
                # Networks
@@ -546,13 +572,14 @@
                  #home-generations = "home-manager generations $@";
                  home-generations = "ls -l ~/.local/state/nix/profiles/ | grep home-manager $@";
                  # Fetching
-                 fetch = "echo -e 'mf => Microfetch\npf => Pridefetch\nhf => Hyfetch\nff => Fastfetch'";
+                 fetch = "echo -e 'mf => Microfetch\npf => Pridefetch\nhf => Hyfetch\nff => Fastfetch\npef => Pfetch\nof => OneFetch'";
                  hf = "hyfetch $@";
                  pf = "pridefetch -f trans --width 11 $@";
                  mf = "microfetch $@";
                  ff = "fastfetch $@";
                  ffl = "fastfetch --logo-type kitty --logo $@";
                  pef = "pfetch $@";
+                 of = "onefetch --nerd-fonts $@";
                  distro = "cat /etc/*-release | grep 'PRETTY_NAME' | cut -c 13- | sed 's/\"//g'";
                  lsbOsRelease = "lsb_release -sd $@";
                  # Editing
@@ -569,6 +596,7 @@
                  tarShow = "tar tvf $@";
                  tarUnzip = "tar xvf $@";
                  tarZip = "echo 'Arg1: Archive.tar.gz, Arg2: Full Path of the Folder';tar -czvf $@";
+                 zipCreate = "echo 'Arg1: Archive.zip, Arg2: Folder/';zip -r $@";
                  # Applications
                  explorer = "yazi $@";
                  gc = "git clone $@";
@@ -1084,6 +1112,7 @@
              home-manager
              osuLazerLatest
              urbitNcl
+             epdfinfoPkg
              libelf
              gnumake
              gcc
@@ -1106,17 +1135,23 @@
 
            programs.nix-ld.enable = true;
 
+           programs.dank-material-shell = {
+             enable = true;
+             quickshell.package = pkgs.unstable.quickshell;
+             dgop.package = inputs.dgop.packages.${pkgs.system}.default;
+           };
+           
            virtualisation.docker = {
              enable = true;
              daemon = {
                settings = {
-                 data-root = "/mnt/docker/";
+                 data-root = "/Mount/docker/";
                };
              };
            };
 
-           fileSystems."/mnt" = {
-             device = "/dev/sda1";
+           fileSystems."/Mount" = {
+             device = "/dev/disk/by-uuid/1393f521-37bc-4a53-bfb1-e74c2e454534";
              fsType = "ext4";
              options = [ "defaults" ];
            };
@@ -1219,7 +1254,13 @@
               };
 
             #systemd.services.zerotierone.wantedBy = lib.mkForce [ ];
-            nixpkgs.config.allowUnfree = true;
+            nixpkgs.config = {
+              allowUnfree = true;
+              permittedInsecurePackages = [
+                "librewolf-bin-146.0.1-1"
+                "librewolf-bin-unwrapped-146.0.1-1"
+              ];
+            };
             # Tmux
             programs.tmux = {
               enable = true;
@@ -1243,7 +1284,7 @@
               ];
             };
             # Ensure the same basic flake options you already enable
-            system.stateVersion = "25.05"; # Did you read the comment?
+            system.stateVersion = "25.11"; # Did you read the comment?
             })
         ];
       };

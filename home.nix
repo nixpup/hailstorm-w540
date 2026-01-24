@@ -398,6 +398,33 @@ in
   home.sessionVariables = {
     XDG_DATA_DIRS = "$HOME/.guix-profile/share:$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:$XDG_DATA_DIRS";
   };
+  home.file.".config/btop/btop.conf" = {
+    source = ./files/config/btop/btop.conf;
+  };
+  home.file.".config/btop/themes/rumda.theme" = {
+    source = ./files/config/btop/themes/rumda.theme;
+  };
+  home.file.".config/hyprlock/hyprlock.conf" = {
+    source = ./files/config/hyprlock/hyprlock.conf;
+  };
+  home.file.".config/hyprlock/hyprlock.png" = {
+    source = ./files/config/hyprlock/hyprlock.png;
+  };
+  home.file.".config/hyprlock/songdetail.sh" = {
+    source = ./files/config/hyprlock/songdetail.sh;
+  };
+  home.file.".config/hyprlock/vivek.jpg" = {
+    source = ./files/config/hyprlock/vivek.jpg;
+  };
+  home.file.".config/hyprlock/Fonts/JetBrains/JetBrains Mono Nerd.ttf" = {
+    source = ./files/config/hyprlock/Fonts/JetBrains/JetBrains_Mono_Nerd.ttf;
+  };
+  home.file.".config/hyprlock/Fonts/SF Pro Display/SF Pro Display Bold.otf" = {
+    source = ./files/config/hyprlock/Fonts/SF_Pro_Display/SF_Pro_Display_Bold.otf;
+  };
+  home.file.".config/hyprlock/Fonts/SF Pro Display/SF Pro Display Regular.otf" = {
+    source = ./files/config/hyprlock/Fonts/SF_Pro_Display/SF_Pro_Display_Regular.otf;
+  };
   # Nix-Search-TV
   home.file.".config/nix-search-tv/config.toml".text = ''
     [sources]
