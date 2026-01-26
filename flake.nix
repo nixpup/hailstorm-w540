@@ -134,6 +134,7 @@
               synapsian = pkgs.callPackage ./packages/synapsian/default.nix {};
               karamarea = pkgs.callPackage ./packages/karamarea/default.nix {};
               templeos = pkgs.callPackage ./packages/templeosFont/default.nix {};
+              gnutypewriter = pkgs.callPackage ./packages/gnutypewriter/default.nix {};
               osuLazerLatest = pkgs.callPackage ./packages/osuLazerLatest.nix {};
               urbitNcl = pkgs.callPackage ./packages/urbit/default.nix {};
               epdfinfoPkg = pkgs.callPackage ./packages/epdfinfo/default.nix {};
@@ -339,6 +340,7 @@
                cartographCF
                synapsian
                karamarea
+               gnutypewriter
                noto-fonts
                noto-fonts-cjk-sans
                noto-fonts-emoji-blob-bin
