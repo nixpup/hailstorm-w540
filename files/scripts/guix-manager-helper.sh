@@ -20,6 +20,10 @@ gm() {
                 return 1
             fi
             ;;
+        l|ls|list)
+            echo "[ Installed Packages ]:"
+            guix package --list-installed
+            ;;
         i|install)
             if  [ "${#argRest[@]}" -eq 0 ]; then
                 echo "[ Please provide Packages to Install ]"
@@ -52,6 +56,10 @@ gm() {
             fi
             guix shell "${argRest[@]}"
             ;;
+        rmo|rmg|rmog)
+            guix package --delete-generations
+            echo "[ Deleted Old Generations ]"
+            ;;
         *|h|help|"")
             cat <<EOF
 gm - guix manager
@@ -63,6 +71,8 @@ Usage:
   gm i|install <packages>                   Install Packages
   gm p|pull|upgrade                         Upgrade/Pull latest Guix and Guix Packages
   gm u|update|refresh                       Update/Refresh Package Definitions
+  gm l|ls|list                              List Installed Packages
+  gm rmo|rmg|rmog                           Delete Old Generations
 EOF
             ;;
     esac
