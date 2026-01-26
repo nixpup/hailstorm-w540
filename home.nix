@@ -31,6 +31,8 @@ in
       fuwamoco = true;
       marnie = false;
       gruvbox = false;
+      templeos = false;
+      installAll = true;
     };
     exwm = {
       enable = true;

@@ -133,6 +133,7 @@
               #vicinae = pkgs.callPackage ./packages/vicinae/default.nix {};
               synapsian = pkgs.callPackage ./packages/synapsian/default.nix {};
               karamarea = pkgs.callPackage ./packages/karamarea/default.nix {};
+              templeos = pkgs.callPackage ./packages/templeosFont/default.nix {};
               osuLazerLatest = pkgs.callPackage ./packages/osuLazerLatest.nix {};
               urbitNcl = pkgs.callPackage ./packages/urbit/default.nix {};
               epdfinfoPkg = pkgs.callPackage ./packages/epdfinfo/default.nix {};
@@ -172,9 +173,9 @@
 
             # NixOS Configuration
             # PATH
-              environment.sessionVariables = {
-                PATH = "/run/current-system/sw/bin:/run/wrappers/bin:$PATH";
-              };
+            environment.sessionVariables = {
+              PATH = "/run/current-system/sw/bin:/run/wrappers/bin:$PATH";
+            };
             # Kernel
             boot.kernelPackages = pkgs.linuxPackages;
             boot.kernelParams = [ "nvidia-drm.modeset=1" ];
@@ -358,6 +359,8 @@
                maple-mono.truetype
                tt2020 # Typewrite Font
                emacs-all-the-icons-fonts # Required for Emacs all-the-icons
+             ] ++ lib.optionals (!config.home-manager.users.puppy.nixMacs.themes.templeos) [
+               templeos
              ];
            };
            # Users
@@ -367,6 +370,8 @@
              description = "puppy";
              extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" "guixbuild" "docker" ];
              packages = with pkgs; [
+               nil
+               nixfmt
                dive
                podman-tui
                docker-compose
