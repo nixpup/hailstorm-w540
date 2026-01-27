@@ -162,15 +162,14 @@
               ...
             }:
             let
-              #vicinae = pkgs.callPackage ./packages/vicinae/default.nix {};
-              synapsian = pkgs.callPackage ./packages/synapsian/default.nix { };
-              karamarea = pkgs.callPackage ./packages/karamarea/default.nix { };
-              templeos = pkgs.callPackage ./packages/templeosFont/default.nix { };
-              gnutypewriter = pkgs.callPackage ./packages/gnutypewriter/default.nix { };
-              osuLazerLatest = pkgs.callPackage ./packages/osuLazerLatest.nix { };
-              urbitNcl = pkgs.callPackage ./packages/urbit/default.nix { };
-              epdfinfoPkg = pkgs.callPackage ./packages/epdfinfo/default.nix { };
-              cartographCF = pkgs.callPackage ./packages/cartographCF/default.nix { };
+              synapsian = pkgs.callPackage ./files/packages/synapsian/default.nix { };
+              karamarea = pkgs.callPackage ./files/packages/karamarea/default.nix { };
+              templeos = pkgs.callPackage ./files/packages/templeosFont/default.nix { };
+              gnutypewriter = pkgs.callPackage ./files/packages/gnutypewriter/default.nix { };
+              osuLazerLatest = pkgs.callPackage ./files/packages/osuLazerLatest.nix { };
+              urbitNcl = pkgs.callPackage ./files/packages/urbit/default.nix { };
+              epdfinfoPkg = pkgs.callPackage ./files/packages/epdfinfo/default.nix { };
+              cartographCF = pkgs.callPackage ./files/packages/cartographCF/default.nix { };
               spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
             in
             {
