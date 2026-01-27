@@ -1,4 +1,11 @@
-{ config, pkgs, lib, inputs, unstable, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  unstable,
+  ...
+}:
 let
   wineWowPackagesBinary = pkgs.wineWowPackages.full;
   fontSize = 13;
@@ -426,7 +433,8 @@ in
   # FastFetch Config
   home.file.".config/fastfetch/config.jsonc".source = ./files/config/fastfetch/config.jsonc;
   # Discord Colorscheme
-  home.file.".config/vesktop/themes/dank-discord.css".source = ./files/config/discord/dank-discord.css;
+  home.file.".config/vesktop/themes/dank-discord.css".source =
+    ./files/config/discord/dank-discord.css;
   # Kitty Colorschemes
   home.file = {
     ".config/kitty/fuwamocoColorscheme.conf".source = ./files/config/kitty/fuwamocoColorscheme.conf;
@@ -443,11 +451,14 @@ in
     ".config/hyprlock/hyprlock.png".source = ./files/config/hyprlock/hyprlock.png;
     ".config/hyprlock/songdetail.sh".source = ./files/config/hyprlock/songdetail.sh;
     ".config/hyprlock/vivek.jpg".source = ./files/config/hyprlock/vivek.jpg;
-    ".config/hyprlock/Fonts/JetBrains/JetBrains Mono Nerd.ttf".source = ./files/config/hyprlock/Fonts/JetBrains/JetBrains_Mono_Nerd.ttf;
-    ".config/hyprlock/Fonts/SF Pro Display/SF Pro Display Bold.otf".source = ./files/config/hyprlock/Fonts/SF_Pro_Display/SF_Pro_Display_Bold.otf;
-    ".config/hyprlock/Fonts/SF Pro Display/SF Pro Display Regular.otf".source = ./files/config/hyprlock/Fonts/SF_Pro_Display/SF_Pro_Display_Regular.otf;
+    ".config/hyprlock/Fonts/JetBrains/JetBrains Mono Nerd.ttf".source =
+      ./files/config/hyprlock/Fonts/JetBrains/JetBrains_Mono_Nerd.ttf;
+    ".config/hyprlock/Fonts/SF Pro Display/SF Pro Display Bold.otf".source =
+      ./files/config/hyprlock/Fonts/SF_Pro_Display/SF_Pro_Display_Bold.otf;
+    ".config/hyprlock/Fonts/SF Pro Display/SF Pro Display Regular.otf".source =
+      ./files/config/hyprlock/Fonts/SF_Pro_Display/SF_Pro_Display_Regular.otf;
   };
- # Zathura
+  # Zathura
   home.file.".config/zathura/zathurarc" = {
     source = ./files/config/zathura/zathurarc;
   };
@@ -659,10 +670,26 @@ in
       treesitter-context.enable = true;
     };
     keymaps = [
-      { key = "<leader>ff"; action = "require('felescope.builfin').find_files"; mode = "n"; }
-      { key = "<leader>ss"; action = ":Telescope live_grep<CR>"; mode = "n"; }
-      { key = "<leader>bb"; action = ":Telescope buffers<CR>"; mode = "n"; }
-      { key = "<leader>o"; action = "<C-w>w"; mode = "n"; }
+      {
+        key = "<leader>ff";
+        action = "require('felescope.builfin').find_files";
+        mode = "n";
+      }
+      {
+        key = "<leader>ss";
+        action = ":Telescope live_grep<CR>";
+        mode = "n";
+      }
+      {
+        key = "<leader>bb";
+        action = ":Telescope buffers<CR>";
+        mode = "n";
+      }
+      {
+        key = "<leader>o";
+        action = "<C-w>w";
+        mode = "n";
+      }
     ];
     opts = {
       # Numbers
@@ -693,9 +720,9 @@ in
       splitkeep = "screen";
       splitright = true;
       cmdheight = 0; # Hide cmd line unless needed.
-      fillchars = { #
-        eob = " ";  # Remove EOB
-      };            #
+      fillchars = {
+        eob = " "; # Remove EOB
+      };
     };
   };
   # Xresources
@@ -1391,7 +1418,7 @@ in
     '';
     executable = true;
   };
-    home.file.".scripts/wineThirtytwoSetup.sh" = {
+  home.file.".scripts/wineThirtytwoSetup.sh" = {
     text = ''
       #!/usr/bin/env bash
 
