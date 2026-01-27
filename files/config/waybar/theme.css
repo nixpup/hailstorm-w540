@@ -1,0 +1,60 @@
+/*
+* Firefox Material Design palette (Dark mode)
+*/
+
+/* Base colors */
+@define-color base   #191114;
+@define-color mantle #130c0f;
+@define-color crust  #0d0709;
+
+/* Text colors */
+@define-color text     #eedfe2;
+@define-color subtext0 #9d8c91;
+@define-color subtext1 #d5c2c7;
+
+/* Surface colors */
+@define-color surface0 #21191c;
+@define-color surface1 #261d20;
+@define-color surface2 #30282a;
+
+/* Overlay colors */
+@define-color overlay0 #3c3235;
+@define-color overlay1 #514348;
+@define-color overlay2 #5a3f49;
+
+/* Accent colors */
+@define-color blue      #e1bdc9;
+@define-color lavender  #ffd9e5;
+@define-color sapphire  #d5c2c7;
+@define-color sky       #e1bdc9;
+@define-color teal      #6e334d;
+@define-color green     #f1bc97;
+@define-color yellow    #f1bc97;
+@define-color peach     #ffdcc5;
+@define-color maroon    #ffb4ab;
+@define-color red       #ffb4ab;
+@define-color mauve     #ffb0ce;
+@define-color pink      #ffd9e5;
+@define-color flamingo  #ffb4ab;
+@define-color rosewater #eedfe2;
+
+/* Additional styling variables - using solid colors instead of rgba */
+@define-color background-primary   #191114;
+@define-color background-secondary #21191c;
+@define-color background-hover     #261d20;
+@define-color border-color         #514348;
+
+/* Status colors */
+@define-color success @green;
+@define-color warning @yellow;
+@define-color error   @red;
+@define-color info    @blue;
+
+/* Module-specific background colors */
+@define-color bg-workspaces #21191c;
+@define-color bg-clock      #ffb0ce;
+@define-color bg-system     #261d20;
+@define-color bg-network    #261d20;
+@define-color bg-audio      #261d20;
+@define-color bg-launcher   #ffb0ce;
+@define-color bg-power      #ffb4ab;

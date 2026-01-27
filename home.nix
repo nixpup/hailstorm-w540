@@ -435,6 +435,13 @@ in
   home.sessionVariables = {
     XDG_DATA_DIRS = "$HOME/.guix-profile/share:$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:$XDG_DATA_DIRS";
   };
+  # Waybar
+  home.file = {
+    ".config/waybar/config.jsonc".source = ./files/config/waybar/config.jsonc;
+    ".config/waybar/style.css".source = ./files/config/waybar/style.css;
+    ".config/waybar/theme.css".source = ./files/config/waybar/theme.css;
+    ".config/waybar/modules.jsonc".source = ./files/config/waybar/modules.jsonc;
+  };
   # ZSH Scripts and Functions
   home.file = {
     ".scripts/shell/buildnix.sh".source = ./files/scripts/buildnix.sh;
