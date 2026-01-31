@@ -1,97 +1,68 @@
 {
-  description = "NixOS configuration for hailstorm (flake-based)";
-
+  description = "Hailstorm NixOS System Flake";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     nix-flatpak.url = "github:gmodena/nix-flatpak/v0.6.0";
-
     stylix = {
       url = "github:nix-community/stylix/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Run 'doas nix flake update nixmacs' after changes to
-    # the repository to rebuild with latest changes!
     nixmacs = {
-      #url = "git+https://codeberg.org/nixpup/NixMacs.git";
       url = "github:nixpup/NixMacs";
-      #url = "path:/home/puppy/NixMacs";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-
     nixvim = {
       url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     noctalia = {
       #url = "github:noctalia-dev/noctalia-shell";
       url = "github:nixpup/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-
     astal = {
       url = "github:aylur/astal";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     ags = {
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.astal.follows = "astal";
     };
-
     vicinae.url = "github:vicinaehq/vicinae";
-
     vicinae-extensions = {
       url = "github:vicinaehq/extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nix-alien = {
-      url = "github:thiagokokada/nix-alien";
-    };
-
-    nix-search-tv = {
-      url = "github:3timeslazy/nix-search-tv";
-    };
-
+    nix-alien.url = "github:thiagokokada/nix-alien";
+    nix-search-tv.url = "github:3timeslazy/nix-search-tv";
     mango = {
       url = "github:DreamMaoMao/mango"; # Add "?ref=vertical-stack" to the url end for specific branch.
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     naitre = {
-      #url = "path:/home/puppy/NaitreHUD"; #/home/puppy/Projects/NaitreHUD
       url = "github:nixpup/NaitreHUD";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     dgop = {
       url = "github:AvengeMedia/dgop";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-
   };
 
   # Added 'inputs@' to 'outputs ='.
@@ -121,7 +92,6 @@
     }:
     let
       system = "x86_64-linux";
-      #agsPkg = ags.${system}.default;
       ags = inputs.ags.packages.x86_64-linux.default;
     in
     {
@@ -173,10 +143,6 @@
               spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
             in
             {
-              # Replace the let-bindings in configuration.nix with these, or
-              # delete them from configuration.nix entirely and rely on imports here.
-
-              # Use the Home Manager NixOS module from the flake input
               imports = [
                 inputs.dms.nixosModules.dank-material-shell # DMS Shell
                 home-manager.nixosModules.home-manager
@@ -425,6 +391,8 @@
                   "docker"
                 ];
                 packages = with pkgs; [
+                  firejail
+                  bubblewrap
                   kdePackages.kcalc
                   kdePackages.kcharselect
                   kdePackages.kclock
@@ -948,6 +916,8 @@
                 enable = true;
                 theme = spicePkgs.themes.nightlight;
               };
+
+              programs.firejail.enable = true;
 
               programs.dank-material-shell = {
                 enable = true;
