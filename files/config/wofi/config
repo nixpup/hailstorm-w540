@@ -1,0 +1,8 @@
+width=820
+location=center
+show=drun          # or run / whatever mode you usually use
+prompt=Run         # optional - you can change it
+allow_markup=true
+term=kitty          # or your preferred terminal if needed
+lines=8
+columns=1

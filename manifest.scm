@@ -10,4 +10,9 @@
    "emacs-pdf-tools"
    "distrobox"
    "nss-certs"
-   "glibc-locales"))
+   "glibc-locales"
+   "haunt"
+   "guile"
+   "oils"
+   "oshu"
+   "icu4c"))

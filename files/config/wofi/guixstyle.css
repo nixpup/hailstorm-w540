@@ -1,0 +1,71 @@
+@define-color bg0      #282A2E;
+@define-color bg1      #1D1F21;
+@define-color bg2      rgba(24, 24, 24, 0.6);
+@define-color fg0      #C5C8C6;
+@define-color accent   #ffbf2d;
+@define-color urgent   #A54242;
+
+* {
+    font-family: "DejaVu Sans Mono", monospace;
+    font-size: 18px;
+    color: @fg0;
+}
+window {
+    margin: 0px;
+    padding: 0px;
+    background-color: @bg2;
+    border-radius: 0px;
+}
+#outer-box {
+    margin: 0px;
+    padding: 0px;
+    background-color: transparent;
+}
+#input {
+    margin: 8px;
+    padding: 8px;
+    border: none;
+    border-radius: 0px;
+    background-color: @bg2;
+    color: @fg0;
+}
+#input image {
+    color: @accent;
+}
+#inner-box {
+    margin: 4px 0px;
+    padding: 0px;
+    background-color: transparent;
+}
+#scroll {
+    margin: 0px;
+}
+#entry {
+    padding: 8px;
+    margin: 0px 4px;
+    border-radius: 0px;
+    background-color: transparent;
+    color: inherit;
+}
+#entry:selected {
+    background-color: @accent;
+    color: @bg2;
+    outline: none;
+}
+#entry:selected * {
+    color: @bg2;
+}
+#text {
+    color: inherit;
+}
+#img {
+    margin-right: 8px;
+    size: 0.8em;     /* roughly matches rofi element-icon size */
+}
+#entry.urgent {
+    color: @urgent;
+}
+#entry:selected.urgent {
+    background-color: @urgent;
+    color: @bg0;
+}

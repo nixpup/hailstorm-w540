@@ -435,6 +435,13 @@ in
   home.sessionVariables = {
     XDG_DATA_DIRS = "$HOME/.guix-profile/share:$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:$XDG_DATA_DIRS";
   };
+  # Wofi
+  home.file = {
+    ".config/wofi/config".source = ./files/config/wofi/config;
+    ".config/wofi/style.css".source = ./files/config/wofi/style.css;
+    ".config/wofi/redstyle.css".source = ./files/config/wofi/redstyle.css;
+    ".config/wofi/guixstyle.css".source = ./files/config/wofi/guixstyle.css;
+  };
   # MPV
   home.file = {
     ".config/mpv/scripts/audio_visualizer.lua".source = ./files/config/mpv/scripts/audio_visualizer.lua;
@@ -457,6 +464,7 @@ in
   home.file = {
     ".config/waybar/config.jsonc".source = ./files/config/waybar/config.jsonc;
     ".config/waybar/style.css".source = ./files/config/waybar/style.css;
+    ".config/waybar/guix.css".source = ./files/config/waybar/guix.css;
     ".config/waybar/layout.jsonc".source = ./files/config/waybar/layout.jsonc;
   };
   # ZSH Scripts and Functions
@@ -527,6 +535,10 @@ in
     "Pictures/Wallpapers/lainGruvbox.jpg".source = ./files/pictures/lainGruvbox.jpg;
     "Pictures/Wallpapers/nixosAnime.png".source = ./files/pictures/nixosAnime.png;
     "Pictures/Wallpapers/fuwamoco.jpg".source = ./files/pictures/fuwamoco.jpg;
+    "Pictures/Wallpapers/guix_wp_01.svg".source = ./files/pictures/guix_wp_01.svg;
+    "Pictures/Wallpapers/guix_wp_02.svg".source = ./files/pictures/guix_wp_02.svg;
+    "Pictures/Wallpapers/guix_wp_01.png".source = ./files/pictures/guix_wp_01.png;
+    "Pictures/Wallpapers/guix_wp_02.png".source = ./files/pictures/guix_wp_02.png;
   };
   # Rofi
   home.file = {
@@ -1361,88 +1373,6 @@ in
         ncdu
         exit
       ''';
-    }
-  '';
-  home.file.".config/wofi/config".text = ''
-    width=480
-    location=center
-    show=drun          # or run / whatever mode you usually use
-    prompt=Run         # optional - you can change it
-    allow_markup=true
-    term=foot          # or your preferred terminal if needed
-    lines=8
-    columns=1
-  '';
-  home.file.".config/wofi/style.css".text = ''
-    @define-color bg0      #282A2E;
-    @define-color bg1      #1D1F21;
-    @define-color fg0      #C5C8C6;
-    @define-color accent   #FF2A54;
-    @define-color urgent   #A54242;
-
-    * {
-        font-family: "DejaVu Sans Mono", monospace;
-        font-size: 14px;
-        color: @fg0;
-    }
-    window {
-        margin: 0px;
-        padding: 0px;
-        background-color: @bg0;
-        border-radius: 0px;
-    }
-    #outer-box {
-        margin: 0px;
-        padding: 0px;
-        background-color: transparent;
-    }
-    #input {
-        margin: 8px;
-        padding: 8px;
-        border: none;
-        border-radius: 0px;
-        background-color: @bg1;
-        color: @fg0;
-    }
-    #input image {
-        color: @accent;
-    }
-    #inner-box {
-        margin: 4px 0px;
-        padding: 0px;
-        background-color: transparent;
-    }
-    #scroll {
-        margin: 0px;
-    }
-    #entry {
-        padding: 8px;
-        margin: 0px 4px;
-        border-radius: 0px;
-        background-color: transparent;
-        color: inherit;
-    }
-    #entry:selected {
-        background-color: @accent;
-        color: @bg0;
-        outline: none;
-    }
-    #entry:selected * {
-        color: @bg0;
-    }
-    #text {
-        color: inherit;
-    }
-    #img {
-        margin-right: 8px;
-        size: 0.8em;     /* roughly matches rofi element-icon size */
-    }
-    #entry.urgent {
-        color: @urgent;
-    }
-    #entry:selected.urgent {
-        background-color: @urgent;
-        color: @bg0;
     }
   '';
   home.file.".config/rofi/old/config.rasi".text = ''
