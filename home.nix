@@ -56,10 +56,11 @@ in
   nixMacs = {
     enable = true;
     themes = {
-      fuwamoco = true;
+      fuwamoco = false;
       marnie = false;
       gruvbox = false;
       templeos = false;
+      guix = true;
       cappuccinoNoir = false;
       installAll = true;
     };
@@ -498,12 +499,14 @@ in
   # FastFetch Config
   home.file.".config/fastfetch/config.jsonc".source = ./files/config/fastfetch/config.jsonc;
   # Discord Colorscheme
-  home.file.".config/vesktop/themes/dank-discord.css".source =
-    ./files/config/discord/dank-discord.css;
+  home.file.".config/vesktop/themes/dank.css".source = ./files/config/discord/dank.css;
+  home.file.".config/vesktop/themes/guix.css".source = ./files/config/discord/guix.css;
+  home.file.".config/vesktop/themes/fuwamoco-theme.css".source = ./files/config/discord/fuwamoco-theme.css;
   # Kitty Colorschemes
   home.file = {
     ".config/kitty/fuwamocoColorscheme.conf".source = ./files/config/kitty/fuwamocoColorscheme.conf;
     ".config/kitty/marnieColorscheme.conf".source = ./files/config/kitty/marnieColorscheme.conf;
+    ".config/kitty/guixColorscheme.conf".source = ./files/config/kitty/guixColorscheme.conf;
   };
   # Btop
   home.file = {
@@ -849,8 +852,6 @@ in
       ###########################
       ### Kitty Configuration ###
       ###########################
-      ### User Config
-      include ~/.config/kitty/main.conf
       ### General Settings
       hide_window_decorations no
       enable_audio_bell no
@@ -918,11 +919,11 @@ in
       ### Padding
       window_padding_width 3
 
-      ### Colorscheme
-      include ~/.config/kitty/fuwamocoColorscheme.conf
-
       ### Keybinds
       map ctrl+shift+l send_text normal,application l\r
+
+      ### User Config
+      include ~/.config/kitty/main.conf
     '';
   };
   programs.mpv = {
