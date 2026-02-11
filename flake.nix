@@ -17,7 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixmacs = {
-      url = "github:nixpup/NixMacs";
+      url = "github:librepup/NixMacs";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
@@ -27,7 +27,7 @@
     };
     noctalia = {
       #url = "github:noctalia-dev/noctalia-shell";
-      url = "github:nixpup/noctalia-shell";
+      url = "github:librepup/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     astal = {
@@ -51,7 +51,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     naitre = {
-      url = "github:nixpup/NaitreHUD";
+      url = "github:librepup/NaitreHUD";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dms = {
@@ -63,6 +63,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    jonafonts.url = "github:librepup/jonafonts";
   };
 
   # Added 'inputs@' to 'outputs ='.
@@ -88,6 +89,7 @@
       dms,
       dgop,
       spicetify-nix,
+      jonafonts,
       ...
     }:
     let
@@ -372,6 +374,7 @@
                     maple-mono.truetype
                     tt2020 # Typewrite Font
                     emacs-all-the-icons-fonts # Required for Emacs all-the-icons
+                    jonafonts.packages.${system}.jonafonts
                   ]
                   ++ lib.optionals (!config.home-manager.users.puppy.nixMacs.themes.templeos) [
                     templeos
@@ -443,6 +446,10 @@
                   element-desktop
                   (pass.withExtensions (exts: with exts; [ pass-import ]))
                   gimp3-with-plugins
+                  metasploit
+                  wpscan
+                  hashcat
+                  sqlmap
                   pciutils
                   xdotool
                   fd
@@ -892,8 +899,8 @@
                   nix-search-tv.packages.x86_64-linux.default
                 ];
               environment.variables = {
-                EDITOR = "nixmacs";
-                VISUAL = "nixmacs";
+                EDITOR = "nixmacs-wayland";
+                VISUAL = "nixmacs-wayland";
                 PAGER = "less";
                 TERMINAL = "kitty";
               };
@@ -934,17 +941,17 @@
                   enable = true;
                   daemon = {
                     settings = {
-                      data-root = "/mnt/docker/";
+                      data-root = "/home/puppy/Documents/Docker/";
                     };
                   };
                 };
               };
 
-              fileSystems."/mnt" = {
-                device = "/dev/disk/by-uuid/1393f521-37bc-4a53-bfb1-e74c2e454534";
-                fsType = "ext4";
-                options = [ "defaults" ];
-              };
+              #fileSystems."/mnt" = {
+              #  device = "/dev/disk/by-uuid/1393f521-37bc-4a53-bfb1-e74c2e454534";
+              #  fsType = "ext4";
+              #  options = [ "defaults" ];
+              #};
 
               programs.gnupg.agent = {
                 enable = true;

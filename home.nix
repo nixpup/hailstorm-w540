@@ -26,7 +26,6 @@ in
         # Autostart
         exec-once=wl-paste --watch cliphist store
         exec-once=dex --autostart environment naitre
-        exec-once=swaybg -i /home/puppy/Pictures/Wallpapers/fuwamoco.jpg -m fill
         exec-once=gammastep -l 52.520008:13.404954 -t 4000:4000
         exec-once=dunst
         exec-once=dms run
