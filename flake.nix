@@ -697,6 +697,11 @@
                       done
                     fi
 
+                    # emacsclient
+                    ec() {
+                      guix shell emacs-pgtk -- emacsclient -c -nw "$@"
+                    }
+
                     # c d-Directory Function
                     function c() {
                       if [[ $1 == d* ]]; then

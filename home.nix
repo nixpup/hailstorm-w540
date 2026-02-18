@@ -702,6 +702,52 @@ in
       keymap("n", "<leader><Down>", "<C-w>j", opts)       -- Bottom pane
       -- Save file
       keymap("n", "<leader>s", ":write<CR>", opts)
+      -- Emacs
+      -- Save file
+      keymap("i", "<C-x>s", "<Esc>:w<CR>", opts)
+      keymap("n", "<C-x>s", ":w<CR>", opts)
+      keymap("i", "<C-x>s", "<C-o>:w<CR>", opts)
+      -- Open file
+      keymap("i", "<C-x>f", "<Esc>:e<Space>", opts)
+      keymap("n", "<C-x>f", ":e<Space>", opts)
+      -- File explorer
+      keymap("n", "<C-x>d", ":Explore<CR>", opts)
+      -- Quit
+      keymap("n", "<C-x>c", ":q<CR>", opts)
+      -- Insert mode navigation
+      keymap("i", "<C-a>", "<Home>", opts)
+      keymap("i", "<C-e>", "<End>", opts)
+      keymap("i", "<C-b>", "<Left>", opts)
+      keymap("i", "<C-f>", "<Right>", opts)
+      keymap("i", "<C-p>", "<Up>", opts)
+      keymap("i", "<C-n>", "<Down>", opts)
+      -- Word navigation in insert mode
+      keymap("i", "<M-b>", "<C-Left>", opts)
+      keymap("i", "<M-f>", "<C-Right>", opts)
+      -- Delete to end of line
+      keymap("i", "<C-k>", "<C-o>D", opts)
+      keymap("n", "<C-k>", "dd", opts)
+      -- Clipboard operations
+      keymap("v", "<M-w>", '"+y', opts)
+      keymap("n", "<C-y>", '"+p', opts)
+      keymap("i", "<C-y>", "<C-r>+", opts)
+      -- Undo/Redo
+      keymap("i", "<C-x>u", "<C-o>u", opts)
+      keymap("n", "<C-x>u", "u", opts)
+      keymap("n", "<C-x>r", "<C-r>", opts)
+      -- Window management
+      keymap("n", "<C-x>2", ":split<CR>", opts)
+      keymap("n", "<C-x>3", ":vsplit<CR>", opts)
+      keymap("n", "<C-x>1", ":only<CR>", opts)
+      keymap("n", "<C-x>0", ":close<CR>", opts)
+      keymap("n", "<C-x>o", "<C-w>w", opts)
+      -- Tab management
+      keymap("n", "<C-c>t", "<Esc>:tabnew<CR>", opts)
+      keymap("n", "<C-c>w", "<Esc>:tabclose<CR>", opts)
+      keymap("n", "<C-c><Tab>", "gt", opts)
+      keymap("n", "<C-c><S-Tab>", "gT", opts)
+      -- Buffer switch
+      keymap("n", "<C-x>b", ":buffer<Space>", opts)
     '';
     plugins = {
       lualine.enable = true;
